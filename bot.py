@@ -7,7 +7,7 @@ import telegram
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, CallbackContext, MessageHandler, Filters, CallbackQueryHandler, JobQueue
 from make_grid import make_grid, rows as grid_rows, cols as grid_cols
-from hash_image import filename_to_hash, hash_is_astolfo
+from hash_image import filename_to_hash, hash_is_lain
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
@@ -30,7 +30,7 @@ def on_join(update: Update, context: CallbackContext):
             markup[row][col] = InlineKeyboardButton(callback_data=img_hash, text=grid_rows+grid_cols-len(grid_tiles))
     msg = context.bot.send_photo(
         caption=f"Welcome to the group, {user.first_name}! "
-                f"To prove you aren't a bot, please select the image that contains Astolfo",
+                f"To prove you aren't a bot, please select the image that contains Lain",
         reply_markup=InlineKeyboardMarkup(markup),
         photo=bio,
         chat_id=update.message.chat_id,
@@ -77,7 +77,7 @@ def button(update: Update, context: CallbackContext) -> None:
     if query.from_user.id != query.message.reply_to_message.new_chat_members[0].id:
         return
     context.job_queue.get_jobs_by_name(str(query.message.reply_to_message.message_id))[0].schedule_removal()
-    correct = hash_is_astolfo[query.data]
+    correct = hash_is_lain[query.data]
     if correct:
         handle_correct(update, context)
     else:

@@ -1,25 +1,25 @@
 import random
 import os
 from PIL import Image, ImageOps, ImageDraw, ImageFont
-from config import rows, cols, output_width, output_height, astolfo_source, astolfnt_source
+from config import rows, cols, output_width, output_height, lain_source, laint_source
 
 
 def make_grid():
     output_image = Image.new("RGB", (output_width,output_height))
 
-    astolfo_paths = []
-    astolfnt_paths = []
-    for file in os.listdir(astolfo_source):
-        astolfo_paths.append(os.path.join(astolfo_source, file))
+    lain_paths = []
+    laint_paths = []
+    for file in os.listdir(lain_source):
+        lain_paths.append(os.path.join(lain_source, file))
 
-    for file in os.listdir(astolfnt_source):
-        astolfnt_paths.append(os.path.join(astolfnt_source, file))
+    for file in os.listdir(laint_source):
+        laint_paths.append(os.path.join(laint_source, file))
 
-    astolfo = random.choice(astolfo_paths)
-    astolfnts = random.sample(astolfnt_paths, k=3)
+    lain = random.choice(lain_paths)
+    laints = random.sample(laint_paths, k=3)
 
-    tiles = astolfnts.copy()
-    tiles.append(astolfo)
+    tiles = laints.copy()
+    tiles.append(lain)
     random.shuffle(tiles)
     tempTiles = tiles.copy()
     x_offset_step = int(output_width / cols)

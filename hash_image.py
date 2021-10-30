@@ -1,10 +1,10 @@
 from PIL import Image
-from config import astolfo_source, astolfnt_source
+from config import lain_source, laint_source
 import os
 
 
 filename_to_hash = {}
-hash_is_astolfo = {}
+hash_is_lain = {}
 
 
 def hash_image(img: Image)-> str:
@@ -17,14 +17,14 @@ def hash_image(img: Image)-> str:
     return hex_representation
 
 
-for file in os.listdir(astolfo_source):
-    filename = os.path.join(astolfo_source, file)
+for file in os.listdir(lain_source):
+    filename = os.path.join(lain_source, file)
     hash = hash_image(Image.open(filename))
     filename_to_hash[filename] = hash
-    hash_is_astolfo[hash] = True
+    hash_is_lain[hash] = True
 
-for file in os.listdir(astolfnt_source):
-    filename = os.path.join(astolfnt_source, file)
+for file in os.listdir(laint_source):
+    filename = os.path.join(laint_source, file)
     hash = hash_image(Image.open(filename))
     filename_to_hash[filename] = hash
-    hash_is_astolfo[hash] = False
+    hash_is_lain[hash] = False
